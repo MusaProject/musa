@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  url: MyString
+  en_lyric: MyString
+  es_lyric: MyString
+  level: MyString
+  ipa: MyString
+
+two:
+  name: MyString
+  url: MyString
+  en_lyric: MyString
+  es_lyric: MyString
+  level: MyString
+  ipa: MyString

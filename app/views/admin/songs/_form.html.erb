@@ -1,0 +1,16 @@
+<%= link_to 'Back to list', admin_songs_path %>
+<%= form_for [:admin, @song] do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label 'English lyric' %>
+  <%= f.text_area :en_lyric %>
+  <%= f.label 'Spanish lyric' %>
+  <%= f.text_area :es_lyric %>
+  <%= f.label :level %>
+  <%= f.text_field :level %>
+  <%= f.label :ipa %>
+  <%= f.text_field :ipa %>
+  <%= f.label 'youtube video url' %>
+  <%= f.text_field :url %>
+  <%= f.submit %>
+<% end %>
