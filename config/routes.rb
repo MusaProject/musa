@@ -4,4 +4,9 @@ Musa::Application.routes.draw do
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
+
+  devise_for :admins, :controllers => { :sessions => "admin/sessions" }
+  namespace :admin do
+    match "dashboard", to: "dashboard#index", via: [:get, :post]
+  end
 end
