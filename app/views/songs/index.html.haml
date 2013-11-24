@@ -1,4 +1,21 @@
-%h1 Songs list
-%dl.accordion{"data-accordion" => ""}
-  = render @songs
+.slide.featured
+  .container.clearfix
+    #main.grid_12.omega
+      %ul.bxslider
+        %li.first
+          = render partial: 'song', locals: { song: Song.first }
+        %li
+          %img{src: "assets/jack_bugg.png"}
+        %li
+          %img{src: "assets/demon.jpg"}
+
+.slide.list
+  .container.clearfix
+    %ul.small-block-grid-3.songs-thumb
+      %li
+        %img{src: "assets/pic1_t.jpg"}
+      %li
+        %img{src: "assets/pic1_t.jpg"}
+      %li
+        %img{src: "assets/pic1_t.jpg"}
 

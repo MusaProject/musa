@@ -5,7 +5,7 @@ jQuery(document).ready(function ($) {
 
     var links = $('.navigation').find('li').not('.linked');
     slide = $('.slide');
-    button = $('.button');
+    button = $('.button').not('.linked');
     mywindow = $(window);
     htmlbody = $('html,body');
 

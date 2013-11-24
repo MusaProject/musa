@@ -1,37 +1,39 @@
-.row
-  %h1.left
-    = @exercise.exercise.name
-  %h3.right
-    Level:
-    %span=@exercise.song.level
+.slide.song-exercise
+  .container.clearfix
+    .grid_12
+      %h1.left
+        = @exercise.exercise.name
+      %h3.right
+        Level:
+        %span=@exercise.song.level
 
-  %h3.right
-    Score:
-    %span.score 0
-.row
-  .large-2.columns
-    = link_to 'Play', '#', id: 'play', class:''
-    %br
-    = link_to 'Stop', '#', id: 'stop', class: ''
-  .large-7.columns
-    .blur
-    #video
-  %table.answers.large-2.columns
-    %thead
-      %tr
-        %th Correct Answer
-        %th Your Answer
-    %tbody
+      %h3.right
+        Score:
+        %span.score 0
+  .row
+    .large-2.columns
+      = link_to 'Play', '#', id: 'play', class:''
+      %br
+      = link_to 'Stop', '#', id: 'stop', class: ''
+    .large-7.columns
+      .blur
+      #video
+    %table.answers.large-2.columns
+      %thead
+        %tr
+          %th Correct Answer
+          %th Your Answer
+      %tbody
 
-.lyric.row
-  - @exercise.parse_lyric.each_with_index do |line,i|
-    - unless line.blank?
-      - blank = line.scan(/\[(.*?)\]/)
-      %p.large-8.columns.large-centered{"data-line"=>"#{i}",
-        "data-ans_n"=> "#{blank.count}",
-        "data-ans"=>"#{blank.join(',')}",
-        class: "#{i == 0 ? 'current': ''} #{blank.empty? ? '' : 'blank'}"}
-        #{raw line.gsub(/\[(.*?)\]/, "<input type='text' id='#{i}' class='blank-input large-3 columns' disabled/>")}
+  .lyric.row
+    - @exercise.parse_lyric.each_with_index do |line,i|
+      - unless line.blank?
+        - blank = line.scan(/\[(.*?)\]/)
+        %p.large-8.columns.large-centered{"data-line"=>"#{i}",
+          "data-ans_n"=> "#{blank.count}",
+          "data-ans"=>"#{blank.join(',')}",
+          class: "#{i == 0 ? 'current': ''} #{blank.empty? ? '' : 'blank'}"}
+          #{raw line.gsub(/\[(.*?)\]/, "<input type='text' id='#{i}' class='blank-input large-3 columns' disabled/>")}
 
 :coffee
   $ ->
