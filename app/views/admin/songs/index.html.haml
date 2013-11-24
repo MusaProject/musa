@@ -1,10 +1,20 @@
-%h6 List of songs
+.row
+  .large-5.columns
+    .row
+      .large-6.columns
+        %h3 List of songs
+      .large-5.columns
+        =link_to 'Add song',  new_admin_song_path, class: "button tiny"
 
-=link_to 'Add song',  new_admin_song_path
-%ul
--@songs.each do |song|
-  %li
-    =song.name
-    =link_to 'Edit', edit_admin_song_path(song)
-    =link_to 'Delete', admin_song_path(song), method: :delete, data: { confirm: 'Are you sure?' }
-    =link_to 'Add Exercise', new_admin_song_song_exercise_path(song)
+.row
+  .large-5.columns
+    -@songs.each do |song|
+      .row
+        .large-4.columns
+          =song.name
+        .large-2.columns
+          =link_to 'Edit', edit_admin_song_path(song)
+        .large-2.columns
+          =link_to 'Delete', admin_song_path(song), method: :delete, data: { confirm: 'Are you sure?' }
+        .large-4.columns
+          =link_to 'Add Exercise', new_admin_song_song_exercise_path(song)
