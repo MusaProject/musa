@@ -9,7 +9,6 @@
     %br
     = link_to 'Stop', '#', id: 'stop', class: ''
   .large-7.columns
-    .blur
     #video
 
 .lyric.row
@@ -25,6 +24,7 @@
 :coffee
   $ ->
     window.pop = Popcorn.youtube( "#video", "#{@song.url}" )
+    $('#video').before('<div class="blur"></div>') unless "#{@song.show_video?}" != 'true'
   VIDEO =
 
     subtitleID: 0

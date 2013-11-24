@@ -7,4 +7,7 @@ class Song < ActiveRecord::Base
     en_lyric.lines
   end
 
+  def show_video?
+    song_exercise.map { |exercise| exercise.gamepaths.map(&:unlock_song).any? }.pop
+  end
 end
