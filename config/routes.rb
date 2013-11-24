@@ -13,6 +13,7 @@ Musa::Application.routes.draw do
       resources :song_exercises
     end
     resources :exercises
+    resources :authors
   end
 
   resources :songs

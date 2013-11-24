@@ -6,6 +6,10 @@
           =f.label :name
           =f.text_field :name
       .row
+        .large-6.columns
+          =f.label :author
+          =select_tag :author, options_for_select(Admin::Author.author_list)
+      .row
         .large-12.columns
           =f.label 'English lyric'
           =f.text_area :en_lyric

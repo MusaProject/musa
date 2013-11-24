@@ -1,0 +1,9 @@
+%h3 Author's list
+
+=link_to 'Add Author', new_admin_author_path
+%ul
+  -@authors.each do |author|
+    %li
+      =author.name
+      =link_to 'Edit', edit_admin_author_path(author)
+      =link_to 'Delete', admin_author_path(author), method: :delete, data: { confirm: 'Are you sure?' }

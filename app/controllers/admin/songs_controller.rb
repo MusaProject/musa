@@ -11,6 +11,7 @@ class Admin::SongsController < Admin::AdminController
 
   def create
     @song = Song.new song_params
+    @song.author_id = params[:author_id]
 
     if @song.save
       redirect_to admin_songs_path
@@ -34,7 +35,7 @@ class Admin::SongsController < Admin::AdminController
   private
 
   def song_params
-    params.require(:song).permit :name, :url, :en_lyric, :es_lyric, :level, :api
+    params.require(:song).permit :name, :url, :en_lyric, :es_lyric, :level, :api, :author_id
   end
 
   def set_song
