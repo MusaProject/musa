@@ -13,5 +13,8 @@
 //= require jquery_ujs
 //= require foundation
 //= require_tree .
-
+//= require jquery.easing.1.3
+//= require waypoints.min
+//= require scripts
+//= require jquery.stellar.min
 $(function(){ $(document).foundation(); });

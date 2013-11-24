@@ -5,27 +5,29 @@
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
     %title= content_for?(:title) ? yield(:title) : "Musa app"
     = stylesheet_link_tag    "application", media: "all"
-    = javascript_include_tag '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'
+    = javascript_include_tag 'http://codeorigin.jquery.com/jquery-2.0.3.js'
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
     %script{src: "http://popcornjs.org/code/dist/popcorn-complete.min.js"}
   %body
-    %nav.top-bar{"data-topbar" => ""}
-      %ul.title-area
-        %li.name
-          %h1
-            %a{href: "#"} Musa
-      / Right Nav Section
-      .right
-        - if current_user
-          Welcome
-          = succeed "!  |  " do
-            %strong.bg-blank
-              = current_user.name
-          = link_to "Sign out", signout_path, id: "sign_out", class: 'bg-blank'
-        - else
-          Not signed in
+    .menu
+      .container.clearfix
+        #logo.grid_3
+          = link_to root_path do
+            %img{ src: 'assets/h_logo.png' }
 
-    .row.small-11.small-centered.columns.11.centered
-      = yield
+        #nav.grid_9.omega
+          %ul.navigation
+            %li
+              - if current_user
+                Welcome
+                = succeed "!" do
+                  %strong= current_user.name
+              - else 
+                Not signed in
+            %li
+              - if current_user
+                = link_to "Sign out", signout_path, id: "sign_out"
+
+    = yield
     = javascript_include_tag "application"
