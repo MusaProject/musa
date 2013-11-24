@@ -3,7 +3,9 @@
   overflow: hidden;
   p{
     text-align: center;
-    line-height: 30px;
+    line-height: 46px;
+    padding-bottom: 0;
+    margin-bottom: 0;
     &.current{
       font-weight: bold;
       font-size: 1.2em;

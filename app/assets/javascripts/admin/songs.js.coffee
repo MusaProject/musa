@@ -1,7 +1,7 @@
 $ ->
   start = 0
   end = 0
-  subtitles = new Array()
+  subtitles = []
 
   $('#next-line').on 'click', (e)->
     e.preventDefault()
@@ -14,12 +14,15 @@ $ ->
     current.removeClass 'current'
 
     end = window.pop.currentTime()
-    line = "{#{start}, #{end}, #{current.text()}}"
+    item = {}
+    item["start"] = "#{start}"
+    item["end"] = "#{end}"
+    item["line"] = "#{current.text()}"
     # debugger
-    subtitles.push line
+    subtitles.push item
     start = end
 
-    $('#song_subtitles').val subtitles
+    $('#song_subtitles').val JSON.stringify(subtitles)
 
 
 

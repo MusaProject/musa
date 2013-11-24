@@ -2,7 +2,50 @@
 .row
   #video.large-centered.columns
 
-:javascript
-  window.pop = Popcorn.youtube( "#video", "#{@song.url}" );
-  window.pop.play();
+.lyric.row
+  - @song.parse_lyric.each_with_index do |line,i|
+    - unless line.blank?
+      - blank = line.scan(/\[([^"]*)\]/)
+      %p.large-8.columns.large-centered{"data-line"=>"#{i}", "data-ans"=>"#{blank.first}", class: "#{i == 0 ? 'current': ''} #{blank.empty? ? '' : 'blank'}"}
+        #{line}
+
+:coffee
+  $ ->
+    window.pop = Popcorn.youtube( "#video", "#{@song.url}" )
+    window.pop.play()
+  VIDEO =
+
+    subtitleID: 0
+    addSubtitle: (start, end, subtitle) ->
+      window.pop.cue end, ->
+        VIDEO.subtitleID += 1
+        VIDEO.displaySubtitle VIDEO.subtitleID
+
+
+    #function to actually display the subtitle
+    displaySubtitle: (index) ->
+      current = $('.current')
+      #VIDEO.checkBlank current
+      lineNumber = index
+      lineHeight = parseInt($('.lyric p').css('line-height'))
+      console.log lineNumber
+      $('.lyric').scrollTop(lineNumber * lineHeight)
+      next = current.next()
+      next.addClass 'current'
+      current.removeClass 'current'
+
+    checkBlank: (current) ->
+      if current.hasClass 'blank'
+        window.pop.pause()
+        setTimeout (->
+          window.pop.play()
+        ), 3000
+
+
+  document.addEventListener "DOMContentLoaded", (->
+    lines = JSON.parse("#{escape_javascript @song.subtitles}")
+    $.each lines, (i,key) ->
+      VIDEO.addSubtitle(key['start'], key['end'], key['line'])
+      console.log key['start']
+  ), false
 
