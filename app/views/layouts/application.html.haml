@@ -29,5 +29,6 @@
               - if current_user
                 = link_to "Sign out", signout_path, id: "sign_out"
 
-    = yield
+    .row.small-11.small-centered.columns.11.centered
+      = yield
     = javascript_include_tag "application"

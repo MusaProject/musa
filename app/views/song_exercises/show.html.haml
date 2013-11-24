@@ -3,13 +3,20 @@
     = @exercise.exercise.name
   %h3.right
     Level:
-    %span.score=@exercise.song.level
+    %span=@exercise.song.level
+
   %h3.right
     Score:
     %span.score 0
 .row
-  #video.large-centered.columns
-  %table.answers
+  .large-2.columns
+    = link_to 'Play', '#', id: 'play', class:''
+    %br
+    = link_to 'Stop', '#', id: 'stop', class: ''
+  .large-7.columns
+    .blur
+    #video
+  %table.answers.large-2.columns
     %thead
       %tr
         %th Correct Answer
@@ -28,12 +35,11 @@
 
 :coffee
   $ ->
-    window.pop = Popcorn.youtube( "#video", "#{@exercise.song.url}" )
-    window.pop.play()
   VIDEO =
 
     subtitleID: 0
     continue: 0
+    timeOut: ''
     addSubtitle: (start, end, subtitle) ->
       window.pop.cue end, ->
         VIDEO.subtitleID += 1
@@ -45,8 +51,14 @@
     displaySubtitle: (current, index) ->
       lineNumber = index
       lineHeight = parseInt($('.lyric p').css('line-height'))
-      console.log lineNumber
+      #console.log lineNumber
       $('.lyric').scrollTop(lineNumber * lineHeight)
+
+      inputs = current.find('input')
+      $.each inputs, (i, input) ->
+        $(input).attr('disabled', 'disabled')
+
+      current.find()
       next = current.next()
       next.addClass 'current'
       current.removeClass 'current'
@@ -55,9 +67,9 @@
       if current.hasClass 'blank'
         window.pop.pause()
         VIDEO.enableInputs current
-        setTimeout (->
-          if VIDEO.continue == 0
-            VIDEO.nextLine current
+        VIDEO.timeOut = setTimeout (->
+          VIDEO.reviewAnswer current.find('input').first()
+          VIDEO.nextLine current
         ), 10000
       else
         VIDEO.displaySubtitle current, VIDEO.subtitleID
@@ -72,36 +84,44 @@
     nextLine: (current) ->
       window.pop.play()
       VIDEO.displaySubtitle current, VIDEO.subtitleID
-      VIDEO.continue = 0
 
     updateScore: ()->
       value = parseInt("#{5}")
       total_ans = $('.correct').length
       total_score = total_ans * value
       $('.score').text total_score
+      actual_op = $('.blur').css('opacity')
+
+      opacity_total = 1 / window.blanks
+      opacity = (total_ans * opacity_total)
+      #console.log opacity
+      $('.blur').css('opacity',1 - opacity)
 
     reviewAnswer: (input) ->
+
       active_input = $(input)
       line = active_input.parents('.current')
       correct_ans = line.data('ans')
-      ans = active_input.val()
+      ans = active_input.val().toLowerCase()
       active_input.attr('disabled', 'disabled')
       correct = ''
-      if ans == correct_ans
-        active_input.addClass('correct')
-        correct = 'check'
-        VIDEO.updateScore()
-      else
-        active_input.addClass('fail')
-        correct = ''
-      $('.answers tbody').append("<tr><td>"+correct_ans+"</td><td class='user-ans "+correct+"'>"+ans+"</td></tr>")
+      unless correct_ans is undefined
+        if ans == correct_ans
+          active_input.addClass('correct')
+          correct = 'check'
+          VIDEO.updateScore()
+        else
+          active_input.addClass('fail')
+          correct = ''
+        $('.answers tbody').append("<tr><td>"+correct_ans+"</td><td class='user-ans "+correct+"'>"+ans+"</td></tr>")
 
 
     inputDone: (input) ->
+      clearTimeout VIDEO.timeOut
       active_input = $(input[0])
       line = active_input.parents('.current')
       ans_n = $(line).data('ans_n')
-      console.log line
+      #console.log line
       if ans_n > 1
         active_input.next('.blank-input').focus()
       else
@@ -111,6 +131,9 @@
 
 
   document.addEventListener "DOMContentLoaded", (->
+    window.pop = Popcorn.youtube( "#video", "#{@exercise.song.url}" )
+
+    window.blanks = $('.blank-input').length
     lines = JSON.parse("#{escape_javascript @exercise.song.subtitles}")
     $.each lines, (i,key) ->
       VIDEO.addSubtitle(key['start'], key['end'], key['line'])
@@ -120,5 +143,14 @@
       code = e.keyCode || e.which
       if code == 13
         VIDEO.inputDone $(e.target)
+
+    $('#play').on 'click', (e) ->
+      e.preventDefault()
+      window.pop.play()
+
+    $('#stop').on 'click', (e) ->
+      e.preventDefault()
+      window.location.reload()
+
   ), false
 

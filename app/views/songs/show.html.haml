@@ -1,16 +1,16 @@
 .row
   %h1.left My video Test
   %h3.right
-    Score:
-    %span.score 0
 .row
-  #video.large-centered.columns
-  %table.answers
-    %thead
-      %tr
-        %th Correct Answer
-        %th Your Answer
-    %tbody
+  .large-2.columns
+    = link_to 'Play', '#', id: 'play', class:''
+    %br
+    = link_to 'Pause', '#', id: 'pause', class: ''
+    %br
+    = link_to 'Stop', '#', id: 'stop', class: ''
+  .large-7.columns
+    .blur
+    #video
 
 .lyric.row
   - @song.parse_lyric.each_with_index do |line,i|
@@ -20,12 +20,11 @@
         "data-ans_n"=> "#{blank.count}",
         "data-ans"=>"#{blank.join(',')}",
         class: "#{i == 0 ? 'current': ''} #{blank.empty? ? '' : 'blank'}"}
-        #{raw line.gsub(/\[(.*?)\]/, "<input type='text' id='#{i}' class='blank-input large-3 columns' disabled/>")}
+        #{line}
 
 :coffee
   $ ->
     window.pop = Popcorn.youtube( "#video", "#{@song.url}" )
-    window.pop.play()
   VIDEO =
 
     subtitleID: 0
@@ -48,15 +47,7 @@
       current.removeClass 'current'
 
     checkBlank: (current) ->
-      if current.hasClass 'blank'
-        window.pop.pause()
-        VIDEO.enableInputs current
-        setTimeout (->
-          if VIDEO.continue == 0
-            VIDEO.nextLine current
-        ), 10000
-      else
-        VIDEO.displaySubtitle current, VIDEO.subtitleID
+      VIDEO.displaySubtitle current, VIDEO.subtitleID
 
     enableInputs: (current) ->
       inputs = current.find('input')
@@ -75,6 +66,12 @@
       total_ans = $('.correct').length
       total_score = total_ans * value
       $('.score').text total_score
+      debugger
+      opacity_total = 1 / window.blanks
+      console.log opacity_total
+      opacity = tola_ans * opacity_toal
+      console.log opacity
+      $('.blur').css('opacity',opacity)
 
     reviewAnswer: (input) ->
       active_input = $(input)
@@ -107,6 +104,8 @@
 
 
   document.addEventListener "DOMContentLoaded", (->
+    window.blanks = $('.blank-input').length
+
     lines = JSON.parse("#{escape_javascript @song.subtitles}")
     $.each lines, (i,key) ->
       VIDEO.addSubtitle(key['start'], key['end'], key['line'])
@@ -116,5 +115,18 @@
       code = e.keyCode || e.which
       if code == 13
         VIDEO.inputDone $(e.target)
+
+    $('#play').on 'click', (e) ->
+      e.preventDefault()
+      window.pop.play()
+
+    $('#stop').on 'click', (e) ->
+      e.preventDefault()
+      window.location.reload()
+
+    $('#pause').on 'click', (e) ->
+      e.preventDefault()
+      window.pop.pause()
+
   ), false
 
