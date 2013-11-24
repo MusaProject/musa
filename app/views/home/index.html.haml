@@ -11,38 +11,36 @@
 
 #slide3.slide{ "data-slide" => "3", "data-stellar-background-ratio" => "0.5" }
   .container.clearfix
-    #main.grid_12.right-text
+    #main.grid_12
       %h1 Learn
     .grid_6
       %p
-        Bacon ipsum dolor sit amet jowl strip steak short ribs, 
-        bacon hamburger corned beef pastrami meatloaf filet mignon. Ham hock pork chop capicola,
-        tenderloin kielbasa chicken ham leberkas jowl bacon biltong t-bone frankfurter drumstick. 
-        Ham sirloin jerky fatback hamburger short ribs bresaola biltong pork loin jowl.
-        Hamburger pig bacon beef. Pork belly meatball kielbasa frankfurter swine. Shankle salami biltong chicken shank jowl.
-
+        MUSA facilita la adquisición de las habilidades que te llevarán a tu meta de aprender inglés.
+        Con las canciones desarrollarás tu comprensión auditiva y escrita, vocabulario y ¡hasta gramática!
+        Seguimos un modelo basado en investigaciones que han demostrado que aprender inglés con canciones incrementa
+        la retención del conocimiento en el cerebro.
     .grid_6.omega
 
 #slide4.slide{ "data-slide" => "4", "data-stellar-background-ratio" => "0.5" }
   .container.clearfix
     #main.grid_12
-      %h1 Enjoy
+      %h1
+        = 'Enjoy & Play'
     .grid_6
-
+      %img{ src: 'assets/popup_score.png' }
     .grid_6.omega
       %p
-        Bacon ipsum dolor sit amet jowl strip steak short ribs, 
-        bacon hamburger corned beef pastrami meatloaf filet mignon. Ham hock pork chop capicola,
-        tenderloin kielbasa chicken ham leberkas jowl bacon biltong t-bone frankfurter drumstick. 
-        Ham sirloin jerky fatback hamburger short ribs bresaola biltong pork loin jowl.
-        Hamburger pig bacon beef. Pork belly meatball kielbasa frankfurter swine. Shankle salami biltong chicken shank jowl.
+        El proceso de aprendizaje debe de ser disfrutable para que pueda ser sostenido.
+        Disfruta el proceso, diviértete mientras aprendes.
+        A todos nos gusta jugar, y el entorno de aprendizaje de MUSA está gamificado,
+        por lo no sentirás que estás completando aburridos ejercicios sino actividades
+        dinámicas e interactivas que te mantendrán motivado por horas.
 
 #slide5.slide{ "data-slide" => "5", "data-stellar-background-ratio" => "0.5" }
   .container.clearfix
     #main.grid_12
-      .grid_7
+      .grid_7.bottom-links
         - if current_user
           = link_to "Go to Songs", songs_path, class: 'songs-link', class: 'btn'
         - else
-          .signin
-            = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" 
+          = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", class: 'btn facebook'
