@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 20131124052827) do
     t.string   "ipa"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "author_id"
     t.text     "subtitles"
+    t.integer  "author_id"
   end
 
   add_index "songs", ["author_id"], name: "index_songs_on_author_id"

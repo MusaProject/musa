@@ -1,4 +1,8 @@
 %h1 My video Test
+.row
+  #video.large-centered.columns
 
-#flex-video
-  %iframe{allowfullscreen: "", frameborder: "0", height: "315", src: "#{@song.url}", width: "100%"}
+:javascript
+  window.pop = Popcorn.youtube( "#video", "#{@song.url}" );
+  window.pop.play();
+
