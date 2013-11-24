@@ -1,7 +1,7 @@
 %dd.small-2.large-6.columns
   = link_to song.name, "#song-#{song.id}-description"
   .content{ id: "song-#{song.id}-description" }
-    %ul.inline-list
+    %ul.inline-list.small-6.small-centered.columns
       %li
         = song.level
       %li
@@ -14,4 +14,4 @@
     = link_to 'Ejercicio de Vocabulario', song_path(song)
 
 #message-modal
-  = render partial: 'modal'
+  = render partial: 'modal', locals: { song: song }

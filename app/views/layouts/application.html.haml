@@ -23,14 +23,13 @@
               - if current_user
                 Welcome
                 = succeed "!" do
-                  %strong= current_user.name 
-              - else
-                = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in"
+                  %strong= current_user.name
+              - else 
+                Not signed in
             %ul.dropdown
               %li
                 - if current_user
                   = link_to "Sign out", signout_path, id: "sign_out"
-    .row
-      .small-11.small-centered.columns.11.centered
-        = yield
+    .row.small-11.small-centered.columns.11.centered
+      = yield
     = javascript_include_tag "application"
