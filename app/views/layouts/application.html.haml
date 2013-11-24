@@ -24,7 +24,10 @@
                 = succeed "!" do
                   %strong= current_user.name
               - else
-                Not signed in
+                = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" 
+            %li.linked
+              - if current_user
+                = link_to 'Go to Songs', songs_path
             %li.linked
               - if current_user
                 = link_to "Sign out", signout_path, id: "sign_out"

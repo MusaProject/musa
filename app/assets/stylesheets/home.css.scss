@@ -31,17 +31,22 @@
 
 #nav {
   margin: 15px 0 0 0;
-.navigation {
-  li a {
-    color: #f68f67;
+  .navigation {
+    li a {
+      color: #f68f67;
+      &.gray {
+        color: #8a8683;
+      }
+    }
   }
-}
 
 }
 
 #slide2, #slide3, #slide5, {
   color: #EFEFEF;
-
+  p {
+    text-align: justify;
+  }
 }
 
 /* SLIDE 2*/
@@ -82,9 +87,6 @@
 /*SLIDE 3*/
 #slide3 {
   background-color: #028A9E;
-  .right-text {
-    text-align: right;
-  }
 
   h1, h2 {
     color: #EFEFEF;
@@ -95,13 +97,15 @@
 /*SLIDE 4*/
 
 #slide4 {
-  background-color: #EFEFEF;
+  background: url('musa_pattern.png') no-repeat;
+  background-size: 100%;
+  background-color: #E1B432;
   p, h1 {
-    color: #f68f67;
+    color: #666566;
   }
 
   p {
-    text-align: right;
+    margin: 45px 0;
   }
 
 }
@@ -114,4 +118,11 @@
   background-color: #f68f67;
   border-radius: 25px;
   -webkit-border-radius: 25px;
+  &.facebook {
+    background-color: #023550;
+  }
+}
+
+.bottom-links {
+  text-align: right;
 }
