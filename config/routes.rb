@@ -14,4 +14,6 @@ Musa::Application.routes.draw do
     end
     resources :exercises
   end
+
+  resources :songs
 end

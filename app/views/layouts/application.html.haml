@@ -8,14 +8,29 @@
     = javascript_include_tag 'http://codeorigin.jquery.com/jquery-2.0.3.js'
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
+    %script{src: "http://popcornjs.org/code/dist/popcorn-complete.min.js"}
   %body
-    #user-widget
-      - if current_user
-        Welcome
-        = succeed "!" do
-          %strong= current_user.name
-        = link_to "Sign out", signout_path, id: "sign_out"
-      - else
-        = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in"
-    = yield
+    %nav.top-bar{"data-topbar" => ""}
+      %ul.title-area
+        %li.name
+          %h1
+            %a{href: "#"} Musa
+      %section.top-bar-section
+        / Right Nav Section
+        %ul.right
+          %li.has-dropdown
+            %a{href: "#"}
+              - if current_user
+                Welcome
+                = succeed "!" do
+                  %strong= current_user.name 
+              - else
+                = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in"
+            %ul.dropdown
+              %li
+                - if current_user
+                  = link_to "Sign out", signout_path, id: "sign_out"
+    .row
+      .small-11.small-centered.columns.11.centered
+        = yield
     = javascript_include_tag "application"
