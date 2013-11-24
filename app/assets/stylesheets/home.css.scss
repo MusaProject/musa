@@ -9,4 +9,39 @@
 
 .signin {
   text-align: center;
+  a {
+    background: white;
+    padding: 10px;
+    border-radius: 10.5px;
+  }
+}
+
+.songs-link {
+  background: #0b93bc;
+  padding: 10px 97px;
+  border-radius: 10.5px;
+  color: white;
+  position: relative;
+  top: -100px;
+  left: 111px;
+  &:hover {
+    color: white;
+    opacity: .5;
+  }
+}
+
+.top-bar, .top-bar .right {
+  background: #0b93bc;
+  border-bottom: 2px solid white;
+  color: white;
+}
+
+.right {
+  line-height: 42px;
+  border-bottom: 1px !important;
+  margin-right: 40px;
+  a {
+    color: white;
+    font-family: 'Nevis';
+  }
 }

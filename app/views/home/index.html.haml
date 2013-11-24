@@ -1,16 +1,18 @@
 #home
-  %img{src: "/assets/bg-temp.jpg"}
+  %img{src: "/assets/musa_site.png"}
 
-- if current_user
-  .featured
-    FEATURED SONGS
-  %ul.small-block-grid-3
-    %li
-      %img{src: "/assets/thumbnail.jpg"}
-    %li
-      %img{src: "/assets/thumbnail.jpg"}
-    %li
-      %img{src: "/assets/thumbnail.jpg"}
-- else
-  .signin
-    = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" 
+  - if current_user
+    = link_to "Go to Songs", songs_path, class: 'songs-link'
+
+    .featured
+      -#FEATURED SONGS
+    -#%ul.small-block-grid-3
+      -#%li
+        -#%img{src: "/assets/thumbnail.jpg"}
+      -#%li
+        -#%img{src: "/assets/thumbnail.jpg"}
+      -#%li
+        -#%img{src: "/assets/thumbnail.jpg"}
+  - else
+    .signin
+      = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" 

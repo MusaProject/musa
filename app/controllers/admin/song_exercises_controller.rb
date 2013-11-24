@@ -7,8 +7,6 @@ class Admin::SongExercisesController < Admin::AdminController
 
   def create
     @exercise = SongExercise.new songexercise_params
-    puts ">>>>>#{songexercise_params}"
-    puts "<<<<<<#{params}"
     @exercise.tap do |exercise|
       exercise.song_id = params[:song_id]
       exercise.exercise_id = params[:exercise_id]
