@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131124031616) do
+ActiveRecord::Schema.define(version: 20131124052827) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 20131124031616) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "gamepaths", force: true do |t|
+    t.string   "points"
+    t.boolean  "unlock_song"
+    t.integer  "song_exercise_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "gamepaths", ["song_exercise_id"], name: "index_gamepaths_on_song_exercise_id"
+  add_index "gamepaths", ["user_id"], name: "index_gamepaths_on_user_id"
 
   create_table "song_exercises", force: true do |t|
     t.integer  "song_id"

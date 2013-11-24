@@ -18,4 +18,5 @@ Musa::Application.routes.draw do
   end
 
   resources :songs
+  resources :gamepaths
 end
