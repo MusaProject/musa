@@ -1,4 +1,18 @@
-%ul
--@exercises.each do |exercise|
-  %li
-    =exercise.name
+.row
+  .large-5.columns
+    .row
+      .large-6.columns
+        %h3 Exercies
+      .large-5.columns
+        =link_to 'Add exercise', new_admin_exercise_path, class: "button tiny"
+
+.row
+  .large-3.columns
+    -@exercises.each do |exercise|
+      .row
+        .large-6.columns
+          =exercise.name
+        .large-2.columns
+          =link_to 'Edit', edit_admin_exercise_path(exercise)
+        .large-2.columns
+          =link_to 'Delete', admin_exercise_path(exercise), method: :delete, data: { confirm: 'Are you sure?' }
