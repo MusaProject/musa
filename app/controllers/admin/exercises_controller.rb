@@ -13,8 +13,10 @@ class Admin::ExercisesController < Admin::AdminController
     @exercise = Exercise.new exercise_params
 
     if @exercise.save
-      redirect_to admin_exercises_path
+      return redirect_to admin_exercises_path
     end
+
+    render action: :new
   end
 
   def edit
@@ -22,8 +24,10 @@ class Admin::ExercisesController < Admin::AdminController
 
   def update
     if @exercise.update(exercise_params)
-      redirect_to admin_exercises_path
+      return redirect_to admin_exercises_path
     end
+
+    render action: :edit
   end
 
   def destroy

@@ -12,8 +12,10 @@ class Admin::AuthorsController < Admin::AdminController
   def create
     @author = Author.new author_params
     if @author.save
-      redirect_to admin_authors_path
+      return redirect_to admin_authors_path
     end
+
+    render action: :new
   end
 
   def edit
@@ -21,8 +23,10 @@ class Admin::AuthorsController < Admin::AdminController
 
   def update
     if @author.update author_params
-      redirect_to admin_authors_path
+      return redirect_to admin_authors_path
     end
+
+    render action: :edit
   end
 
   def destroy

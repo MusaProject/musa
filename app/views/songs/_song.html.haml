@@ -11,7 +11,10 @@
     %p
       Description lorem ipsum
 
-    = link_to 'Ejercicio de Vocabulario', song_path(song)
+    %ul
+    -song.song_exercise.each do |e|
+      %li
+        = link_to "#{e.exercise.name} exercise", song_path(song)
 
 #message-modal
   = render partial: 'modal', locals: { song: song }

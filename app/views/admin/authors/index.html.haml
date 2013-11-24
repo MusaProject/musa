@@ -1,9 +1,18 @@
-%h3 Author's list
+.row
+  .large-5.columns
+    .row
+      .large-6.columns
+        %h3 Author's list
+      .large-5.columns
+        =link_to 'Add Author', new_admin_author_path, class: "button tiny"
 
-=link_to 'Add Author', new_admin_author_path
-%ul
-  -@authors.each do |author|
-    %li
-      =author.name
-      =link_to 'Edit', edit_admin_author_path(author)
-      =link_to 'Delete', admin_author_path(author), method: :delete, data: { confirm: 'Are you sure?' }
+.row
+  .large-3.colums
+    -@authors.each do |author|
+      .row
+        .large-6.columns
+          =author.name
+        .large-3.columns
+          =link_to 'Edit', edit_admin_author_path(author)
+        .large-3.columns
+          =link_to 'Delete', admin_author_path(author), method: :delete, data: { confirm: 'Are you sure?' }
