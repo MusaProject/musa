@@ -6,3 +6,20 @@
   height: 400px;
   width: 500px;
 }
+
+.accordion {
+  dd > a {
+    background: white;
+    color: #0b93bc;
+  }
+
+  .content.active {
+    background: #efefef;
+  }
+}
+
+h1 {
+  color: white;
+}
+
+
