@@ -9,12 +9,21 @@
 
 .bxslider {
   .first {
-    background: url('pic1.jpg');
+    background: url('pic1.png');
   }
 }
 
 .slide.featured {
   padding: 70px 0;
+  background: #023550;
+  background-size: 100%;
+  .grid_12 {
+    min-height: 353px;
+  }
+
+  li.first {
+    min-height: 353px;
+  }
 }
 
 .songs-thumb {
