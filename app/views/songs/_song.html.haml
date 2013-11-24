@@ -1,17 +1,18 @@
-%ul.inline-list.small-6.small-centered.columns
-  %li
-    = song.level
-  %li
-    = link_to 'IPA', '#', 'data-reveal-id' =>  'ipa-modal'
-  %li
-    = link_to 'Español', '#', 'data-reveal-id' =>  'spanish-modal'
-%p
-  Description lorem ipsum
-
-%ul
-  -song.song_exercise.each do |e|
+#song-info
+  %ul.inline-list
     %li
-      = link_to "#{e.exercise.name} exercise", song_exercise_path(e)
+      = song.level
+    %li
+      = link_to 'IPA', '#', 'data-reveal-id' =>  'ipa-modal'
+    %li
+      = link_to 'Español', '#', 'data-reveal-id' =>  'spanish-modal'
+  %p
+    Description lorem ipsum
+
+  %ul.exercises
+    -song.song_exercise.each do |e|
+      %li
+        = link_to "#{e.exercise.name} exercise", song_exercise_path(e)
 
 #message-modal
   = render partial: 'modal', locals: { song: song }

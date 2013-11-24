@@ -7,14 +7,9 @@
   width: 500px;
 }
 
-.bxslider {
-  .first {
-    background: url('pic1.png');
-  }
-}
-
 .slide.featured {
   padding: 70px 0;
+  margin-bottom: 0px;
   background: #023550;
   background-size: 100%;
   .grid_12 {
@@ -23,10 +18,27 @@
 
   li.first {
     min-height: 353px;
+    background: url('sun.png');
+    text-align: right;
+    #song-info {
+      background: white;
+      opacity: .7;
+      text-align: right;
+      margin-top: 70px;
+      float: right;
+      padding: 50px;
+      .exercises {
+        list-style: none;
+      }
+    }
   }
 }
 
 .songs-thumb {
   height: 200px;
   text-align: center;
+}
+
+.slide.list {
+  background: #EFEFEF;
 }
