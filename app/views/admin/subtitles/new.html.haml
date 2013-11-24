@@ -1,0 +1,19 @@
+
+.lyric.row
+  - @song.parse_lyric.each_with_index do |line,i|
+    - unless line.blank?
+      %p.large-8.columns.large-centered{"data-line"=>"#{i}", class: "#{i == 0 ? 'current': ''}"}
+        #{line}
+= link_to 'Next Line', '#', class: 'button right', id: 'next-line'
+= form_for [:admin, @song] do |f|
+  = f.hidden_field :subtitles
+  = f.submit class: 'button left alert'
+
+.clearfix
+.row
+  #video.large-centered.columns
+
+:javascript
+  window.pop = Popcorn.youtube( "#video", "#{@song.url}" );
+  window.pop.play();
+
