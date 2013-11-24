@@ -1,18 +1,48 @@
-#home
-  %img{src: "/assets/musa_site.png"}
+#slide2.slide{ "data-slide" => "2", "data-stellar-background-ratio" => "0.5" }
+  .container.clearfix
+    #main.grid_12
+    .grid_6
 
-  - if current_user
-    = link_to "Go to Songs", songs_path, class: 'songs-link'
+    .grid_6.omega.learn
+      %img{ src: 'assets/logo_slogan.png' }
+      %ul.navigation
+        %li{ 'data-slide'=> '3' }
+          More
 
-    .featured
-      -#FEATURED SONGS
-    -#%ul.small-block-grid-3
-      -#%li
-        -#%img{src: "/assets/thumbnail.jpg"}
-      -#%li
-        -#%img{src: "/assets/thumbnail.jpg"}
-      -#%li
-        -#%img{src: "/assets/thumbnail.jpg"}
-  - else
-    .signin
-      = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" 
+#slide3.slide{ "data-slide" => "3", "data-stellar-background-ratio" => "0.5" }
+  .container.clearfix
+    #main.grid_12.right-text
+      %h1 Learn
+    .grid_6
+      %p
+        Bacon ipsum dolor sit amet jowl strip steak short ribs, 
+        bacon hamburger corned beef pastrami meatloaf filet mignon. Ham hock pork chop capicola,
+        tenderloin kielbasa chicken ham leberkas jowl bacon biltong t-bone frankfurter drumstick. 
+        Ham sirloin jerky fatback hamburger short ribs bresaola biltong pork loin jowl.
+        Hamburger pig bacon beef. Pork belly meatball kielbasa frankfurter swine. Shankle salami biltong chicken shank jowl.
+
+    .grid_6.omega
+
+#slide4.slide{ "data-slide" => "4", "data-stellar-background-ratio" => "0.5" }
+  .container.clearfix
+    #main.grid_12
+      %h1 Enjoy
+    .grid_6
+
+    .grid_6.omega
+      %p
+        Bacon ipsum dolor sit amet jowl strip steak short ribs, 
+        bacon hamburger corned beef pastrami meatloaf filet mignon. Ham hock pork chop capicola,
+        tenderloin kielbasa chicken ham leberkas jowl bacon biltong t-bone frankfurter drumstick. 
+        Ham sirloin jerky fatback hamburger short ribs bresaola biltong pork loin jowl.
+        Hamburger pig bacon beef. Pork belly meatball kielbasa frankfurter swine. Shankle salami biltong chicken shank jowl.
+
+#slide5.slide{ "data-slide" => "5", "data-stellar-background-ratio" => "0.5" }
+  .container.clearfix
+    #main.grid_12
+      .grid_7
+        - if current_user
+          = link_to "Go to Songs", songs_path, class: 'songs-link', class: 'btn'
+        - else
+          .signin
+            = link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" 
