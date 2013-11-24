@@ -34,7 +34,7 @@ class Admin::SongsController < Admin::AdminController
   private
 
   def song_params
-    params.require(:song).permit :name, :url, :en_lyric, :es_lyric, :level, :api
+    params.require(:song).permit :name, :url, :en_lyric, :es_lyric, :level, :api, :subtitles
   end
 
   def set_song

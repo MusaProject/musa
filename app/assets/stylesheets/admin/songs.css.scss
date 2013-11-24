@@ -1,0 +1,17 @@
+.lyric{
+  height: 300px;
+  overflow: hidden;
+  p{
+    text-align: center;
+    line-height: 30px;
+    &.current{
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  }
+}
+
+#video {
+  height: 300px;
+  width: 400px;
+}
