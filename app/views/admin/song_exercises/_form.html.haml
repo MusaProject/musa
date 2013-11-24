@@ -1,0 +1,17 @@
+.row
+  .large-4.colums
+    =form_for [:admin, @song, @exercise] do |f|
+      .row
+        .large-12.columns
+          =select_tag 'exercise_id', options_for_select(Admin::Exercise.exercise_list)
+      .row
+        .large-12.columns
+          =f.label :lyric
+          =f.text_area :lyric
+      .row
+        .large-12.columns
+          =f.label :points
+          =f.text_field :points
+      .row
+        =f.submit class: "button tiny"
+
