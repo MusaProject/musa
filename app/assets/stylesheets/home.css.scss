@@ -29,3 +29,18 @@
     opacity: .5;
   }
 }
+
+.top-bar, .top-bar .right {
+  background: #0b93bc;
+  border-bottom: 2px solid white;
+  color: white;
+}
+
+.right {
+  line-height: 42px;
+  border-bottom: 1px !important;
+  margin-right: 40px;
+  a {
+    color: white;
+  }
+}

@@ -15,21 +15,17 @@
         %li.name
           %h1
             %a{href: "#"} Musa
-      %section.top-bar-section
-        / Right Nav Section
-        %ul.right
-          %li.has-dropdown
-            %a{href: "#"}
-              - if current_user
-                Welcome
-                = succeed "!" do
-                  %strong= current_user.name
-              - else
-                Not signed in
-            %ul.dropdown
-              %li
-                - if current_user
-                  = link_to "Sign out", signout_path, id: "sign_out"
+      / Right Nav Section
+      .right
+        - if current_user
+          Welcome
+          = succeed "!  |  " do
+            %strong.bg-blank
+              = current_user.name
+          = link_to "Sign out", signout_path, id: "sign_out", class: 'bg-blank'
+        - else
+          Not signed in
+
     .row.small-11.small-centered.columns.11.centered
       = yield
     = javascript_include_tag "application"
