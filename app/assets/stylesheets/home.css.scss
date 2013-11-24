@@ -24,7 +24,7 @@
   h1 {
     margin: 0;
     a {
-      color: #FF530D;
+      color: #f68f67;
     }
   }
 }
@@ -33,7 +33,7 @@
   margin: 15px 0 0 0;
 .navigation {
   li a {
-    color: #FF530D;
+    color: #f68f67;
   }
 }
 
@@ -65,7 +65,8 @@
         color: #04BFBF;
         font-size: 30px;
         border: 1px solid #04BFBF;
-        border-radius: 10px;
+        border-radius: 25px;
+        -webkit-border-radius: 25px;
         padding: 0px 31px;
         &:hover {
           opacity: .5;
@@ -96,11 +97,21 @@
 #slide4 {
   background-color: #EFEFEF;
   p, h1 {
-    color: #FF530D;
+    color: #f68f67;
   }
 
   p {
     text-align: right;
   }
 
+}
+
+.btn {
+  margin: 20px 0;
+  padding: 15px 30px;
+  color: #EFEFEF !important;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f68f67;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
 }
