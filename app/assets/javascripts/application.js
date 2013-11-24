@@ -18,5 +18,6 @@
 //= require waypoints.min
 //= require scripts
 //= require jquery.stellar.min
-
+//= require jquery.fitvids
+//= require jquery.bxslider.min
 $(function(){ $(document).foundation(); });
