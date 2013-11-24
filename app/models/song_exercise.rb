@@ -5,4 +5,9 @@ class SongExercise < ActiveRecord::Base
   has_many :gamepaths
 
   delegate :exercise_list, to: :exercise
+
+  def parse_lyric
+    puts lyric
+    lyric.lines
+  end
 end

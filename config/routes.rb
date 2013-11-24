@@ -19,4 +19,5 @@ Musa::Application.routes.draw do
 
   resources :songs
   resources :gamepaths
+  resources :song_exercises
 end

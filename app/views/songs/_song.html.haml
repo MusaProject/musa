@@ -14,7 +14,7 @@
     %ul
     -song.song_exercise.each do |e|
       %li
-        = link_to "#{e.exercise.name} exercise", song_path(song)
+        = link_to "#{e.exercise.name} exercise", song_exercise_path(e)
 
 #message-modal
   = render partial: 'modal', locals: { song: song }
