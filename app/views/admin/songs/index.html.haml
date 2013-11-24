@@ -1,0 +1,10 @@
+%h6 List of songs
+
+=link_to 'Add song',  new_admin_song_path
+%ul
+-@songs.each do |song|
+  %li
+    =song.name
+    =link_to 'Edit', edit_admin_song_path(song)
+    =link_to 'Delete', admin_song_path(song), method: :delete, data: { confirm: 'Are you sure?' }
+    =link_to 'Add Exercise', new_admin_song_song_exercise_path(song)
