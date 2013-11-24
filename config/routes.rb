@@ -10,4 +10,6 @@ Musa::Application.routes.draw do
     match "dashboard", to: "dashboard#index", via: [:get, :post]
     resources :songs
   end
+
+  resources :songs
 end
