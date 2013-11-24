@@ -1,13 +1,26 @@
-%h1 My video Test
+.row
+  %h1.left My video Test
+  %h3.right
+    Score:
+    %span.score 0
 .row
   #video.large-centered.columns
+  %table.answers
+    %thead
+      %tr
+        %th Correct Answer
+        %th Your Answer
+    %tbody
 
 .lyric.row
   - @song.parse_lyric.each_with_index do |line,i|
     - unless line.blank?
-      - blank = line.scan(/\[([^"]*)\]/)
-      %p.large-8.columns.large-centered{"data-line"=>"#{i}", "data-ans"=>"#{blank.first}", class: "#{i == 0 ? 'current': ''} #{blank.empty? ? '' : 'blank'}"}
-        #{line}
+      - blank = line.scan(/\[(.*?)\]/)
+      %p.large-8.columns.large-centered{"data-line"=>"#{i}",
+        "data-ans_n"=> "#{blank.count}",
+        "data-ans"=>"#{blank.join(',')}",
+        class: "#{i == 0 ? 'current': ''} #{blank.empty? ? '' : 'blank'}"}
+        #{raw line.gsub(/\[(.*?)\]/, "<input type='text' id='#{i}' class='blank-input large-3 columns' disabled/>")}
 
 :coffee
   $ ->
@@ -16,16 +29,16 @@
   VIDEO =
 
     subtitleID: 0
+    continue: 0
     addSubtitle: (start, end, subtitle) ->
       window.pop.cue end, ->
         VIDEO.subtitleID += 1
-        VIDEO.displaySubtitle VIDEO.subtitleID
+        current = $('.current')
+        VIDEO.checkBlank current
 
 
     #function to actually display the subtitle
-    displaySubtitle: (index) ->
-      current = $('.current')
-      #VIDEO.checkBlank current
+    displaySubtitle: (current, index) ->
       lineNumber = index
       lineHeight = parseInt($('.lyric p').css('line-height'))
       console.log lineNumber
@@ -37,9 +50,60 @@
     checkBlank: (current) ->
       if current.hasClass 'blank'
         window.pop.pause()
+        VIDEO.enableInputs current
         setTimeout (->
-          window.pop.play()
-        ), 3000
+          if VIDEO.continue == 0
+            VIDEO.nextLine current
+        ), 10000
+      else
+        VIDEO.displaySubtitle current, VIDEO.subtitleID
+
+    enableInputs: (current) ->
+      inputs = current.find('input')
+      $.each inputs, (i, input) ->
+        $(input).removeAttr('disabled')
+        if i == 0
+          $(input).focus()
+
+    nextLine: (current) ->
+      window.pop.play()
+      VIDEO.displaySubtitle current, VIDEO.subtitleID
+      VIDEO.continue = 0
+
+    updateScore: ()->
+      value = parseInt("#{5}")
+      total_ans = $('.correct').length
+      total_score = total_ans * value
+      $('.score').text total_score
+
+    reviewAnswer: (input) ->
+      active_input = $(input)
+      line = active_input.parents('.current')
+      correct_ans = line.data('ans')
+      ans = active_input.val()
+      active_input.attr('disabled', 'disabled')
+      correct = ''
+      if ans == correct_ans
+        active_input.addClass('correct')
+        correct = 'check'
+        VIDEO.updateScore()
+      else
+        active_input.addClass('fail')
+        correct = ''
+      $('.answers tbody').append("<tr><td>"+correct_ans+"</td><td class='user-ans "+correct+"'>"+ans+"</td></tr>")
+
+
+    inputDone: (input) ->
+      active_input = $(input[0])
+      line = active_input.parents('.current')
+      ans_n = $(line).data('ans_n')
+      console.log line
+      if ans_n > 1
+        active_input.next('.blank-input').focus()
+      else
+        VIDEO.reviewAnswer active_input
+        VIDEO.continue = 1
+        VIDEO.nextLine line
 
 
   document.addEventListener "DOMContentLoaded", (->
@@ -47,5 +111,10 @@
     $.each lines, (i,key) ->
       VIDEO.addSubtitle(key['start'], key['end'], key['line'])
       console.log key['start']
+
+    $('.blank-input').on 'keypress', (e) ->
+      code = e.keyCode || e.which
+      if code == 13
+        VIDEO.inputDone $(e.target)
   ), false
 

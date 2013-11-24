@@ -17,3 +17,22 @@
   height: 300px;
   width: 400px;
 }
+
+.blank-input{
+  height: 22px !important;
+  width: 90px !important;
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: initial;
+}
+.answers{
+  td{
+    &.user-ans{
+      color: red;
+    }
+    &.check{
+      color: green;
+    }
+  }
+}
